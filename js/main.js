@@ -5,12 +5,16 @@ let visualizadorHabArray = [];
 fetch("../js/items.json")
 .then(response => response.json())
 .then(data => {
+    console.log(data);
     visualizadorHabArray = data;
     cargaVisualizador(visualizadorHabArray);
 })
 
 //////////////////////// OPERADOR AVANZADO //////////////////////////
-carritoArray = carritoArray = JSON.parse(localStorage.getItem("carritoArray")) || [];
+window.addEventListener("DOMContentLoaded",() => {
+    carritoArray = carritoArray = JSON.parse(localStorage.getItem("carritoArray")) || [];
+    crearCheckout();
+})
 
 /////////////////////////////////////////////////////////////////////
 //////////////////////// SELECTORES QUERYS //////////////////////////
@@ -210,7 +214,7 @@ function avisoVaciado (){
         text: 'Su carrito ha sido vaciado por completo',
         icon: 'success',
         confirmButtonColor: '#06563b',
-        confirmButtonText: 'Okey' 
+        confirmButtonText: 'Aceptar' 
         })
       vaciarCarrito();
     }
