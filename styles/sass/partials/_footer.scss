@@ -1,0 +1,31 @@
+/* ---- PARTIAL FOOTER ---- */
+
+footer {
+    padding-top: 2.4em;
+    img {
+        width: 40px;
+    }
+    p {
+        padding: 25px;
+    }
+    a {
+        &:hover{
+            filter: drop-shadow(1px 3px 3px $fontColor);
+            animation: popRedes 0.8s ease-in-out 1;
+        }
+    }
+}
+
+.logosRedes {
+    margin: 10px 20px;
+}
+
+// KEYFRAMES PARA EFECTO EN FOOTER
+
+@keyframes popRedes{
+    25%  {transform: scale(0.95);}
+    75%  {transform: scale(1.15);}
+    90%  {transform: scale(1.1);}
+    100%  {transform: scale(1);}
+  }
+

@@ -1,0 +1,26 @@
+/* ---- PARTIAL ACTIVIDADES ---- */
+
+.flechita {
+    margin-top: 10px;
+    width: 2em;
+}
+
+.actividades {
+    padding: 1em;
+    &:hover{
+        background-color: $fondoVerdeClaro;
+        img{
+            filter: saturate(110%);
+        }
+        .flechita{            
+            transform: rotateZ(180deg);
+            scale: 0.9;
+            filter: drop-shadow(1px 2px 3px $fontColor);
+            transition: $animaBotones;
+        }
+    }
+    &{
+        filter: saturate(25%);
+    }
+}
+

@@ -1,0 +1,51 @@
+/* ---- PARTIAL HOME-INICIO ---- */
+
+/* CONTENEDOR PRINCIPAL, MAPA, SECTION  */
+
+.contenedor {
+  width: 95%;
+  margin: 5% auto;
+  padding: 2%;
+  background: $colorBlanco;
+  .mapa {
+    padding: 10px 20px;
+  }
+}
+
+.mapaCapa {
+  filter: saturate(0%);
+  opacity: 0.6;
+  transition: $animaBotones;
+  &:hover {
+    opacity: 1;
+    filter: saturate(110%);
+  }
+}
+
+section {
+  padding: 5%;
+}
+
+/* SECTION CON LOS 4 ICONOS Y SU HOVER */
+
+section {
+  p {
+    padding-top: 30px;
+  }
+}
+
+.iconosHover {
+  transition: all 0.7s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(3px 10px 8px $primarioVerde);
+  }
+}
+
+/* SLIDER */
+
+.carousel button:hover {
+  background: none;
+}
+
+

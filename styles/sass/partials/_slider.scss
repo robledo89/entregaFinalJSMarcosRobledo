@@ -1,0 +1,23 @@
+/* ---- PARTIAL SLIDER ---- */
+
+#carouselHotel .controlesSlider:hover {
+  transition: $carousel-transition-duration;
+  span {
+    width: 2.2em;
+    height: 2.2em;
+    background-color: $primarioVerde;
+    border-radius: 100%;
+  }
+}
+
+.carousel-indicators {
+  color: $primarioVerde;
+}
+
+.carousel-indicators .active {
+  background-color: $cuaternarioVerde;
+}
+
+.slide {
+  transition: $carousel-transition;
+}

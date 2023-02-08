@@ -1,0 +1,35 @@
+{
+  "name": "preentrega1-robledomarcos",
+  "version": "1.0.0",
+  "description": "entrega3",
+  "main": "index.html",
+  "scripts": {
+    "test": "Hola mundo",
+    "build-css": "node-sass --include-path scss styles/sass/origen.scss styles/css/style.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robledo89/PreEntrega2MarcosRobledo.git"
+  },
+  "keywords": [
+    "node",
+    "sass",
+    "class",
+    "example"
+  ],
+  "author": "marcos robledo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robledo89/PreEntrega2MarcosRobledo/issues"
+  },
+  "homepage": "https://github.com/robledo89/PreEntrega2MarcosRobledo#readme",
+  "devDependencies": {
+    "node-sass": "^8.0.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "sweetalert2": "^11.7.1"
+  }
+}

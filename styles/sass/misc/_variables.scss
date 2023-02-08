@@ -1,0 +1,31 @@
+/* ---- MISC VARIABLES ---- */
+
+// COLORES
+$primarioVerde: #91e8c1;
+//$primarioVerde: #69e1ab;
+$secundarioVerde: #0a4d417f;
+$tercearioVerde: #06563b;
+$cuaternarioVerde: #5dab88;
+$quintoVerde: #01301b;
+$fontColor: grey;
+$colorBlanco: white;
+$fondoVerdeClaro: #e6fff3;
+
+// FONTS
+$fontItalic: "Merienda", cursive;
+$fontSans: "Open Sans", sans-serif;
+
+// TAMAÑO FONTS
+$titulos: 55px;
+$subTitulos: 40px;
+$parrafos: 22px;
+
+// PADDINGS
+$padding20cero: 20px 0px;
+$padding0: 0px;
+
+// OTROS
+$borders: 0.5em;
+$animaBotones: all 0.6s ease-in;
+$carousel-transition-duration: 5s ease, opacity 0.5s ease-in-out;
+$carousel-transition: transform $carousel-transition-duration; 

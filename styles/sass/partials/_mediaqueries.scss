@@ -1,0 +1,83 @@
+/* ---- PARTIAL MEDIA QUERIES ---- */
+
+/* BLOQUEO HOVER EN MOBILE */
+
+@media only screen and (min-width: 768px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        background-color: $cuaternarioVerde;
+        transition: all 1s ease-in;
+    }
+}
+
+/* BREAKPOINT DE MAX 768 CON CAMBIOS DE ESTILOS */
+
+@media only screen and (max-width: 768px) {
+    .contenedor {
+        h1 {
+            font-size: 40px;
+            padding: 18px 15px;
+        }
+
+        h2 {
+            font-size: 35px;
+            padding: 18px 15px;
+        }
+
+        p {
+            font-size: 18px;
+            padding: 0px 15px;
+        }
+    }
+
+    .navbar-nav:hover {
+        .bordeParaNav {
+            border-right: none;
+        }
+    }
+
+    .logosRedes {
+        margin: 30px 12px;
+    }
+
+    .textoFooter p {
+        font-size: 14px;
+        padding: 25px;
+    }
+
+    .navbar-brand img {
+        width: 70px;
+    }
+
+    .inputForm {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    textarea{
+        width: 100%;
+        display: block;
+    }
+
+    .buttonForm{
+        width: 100%;
+        margin-top: 1%;
+        margin-bottom: 3%;
+    }
+
+    .textForm {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .bordeParaNav {
+        border-right: none;
+    }
+    .navbar-nav:hover {
+        .bordeParaNav {
+            border-right: none;
+        }
+    }
+}

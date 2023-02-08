@@ -1,0 +1,73 @@
+/* ---- PARTIAL HEADER - BORDE DE NAV Y HOVER ---- */
+
+.bordeParaNav {
+    border-right: solid 1px $fontColor;
+}
+
+ul:hover {
+    a {
+        color: $primarioVerde;
+    }
+    .bordeParaNav {
+        border-right: solid 1px $colorBlanco;
+        transition-duration: 2s;
+    }
+}
+.navbar-brand:hover {
+    border: none;
+}
+
+header a:hover {
+    border-bottom: solid 1px $cuaternarioVerde;
+}
+
+/* CUSTOMIZACIÓN DE CLASES BS DEL NAV */
+
+.bg-light {
+    --bs-bg-opacity: 0;
+    background-color: none;
+}
+
+.nav-link {
+    color: $tercearioVerde;
+    margin: 0rem 0.8rem;
+    padding: 12px 12px;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    justify-content: right;
+}
+
+.navbar-toggler:hover {
+    text-decoration: none;
+    background-color: $primarioVerde;
+}
+
+.navbar-brand {
+    animation-name: logoAnimado;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+
+    &:hover {
+        transform: scale(1.03);
+        filter: drop-shadow(1px 4px 3px $cuaternarioVerde);
+        transition: all 0.8s ease-in-out;
+    }
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+    color: $colorBlanco;
+    background-color: $secundarioVerde;
+}
+
+/* KEYFRAMES PARA ANIMACION LOGO */
+
+@keyframes logoAnimado {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

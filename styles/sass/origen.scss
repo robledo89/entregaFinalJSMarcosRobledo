@@ -1,0 +1,27 @@
+/* ---- SCSS ORIGEN ---- */
+
+/* ORIGEN - VARIABLES */
+@import "./misc/variables";
+
+/* ORIGEN - NORMALIZE */
+@import "./misc/normalize";
+
+/* INCLUDE DE MIXINS */
+
+h1 {
+    @include mixinH1;
+}
+
+h2 {
+    @include mixinH2;
+}
+
+/* ORIGEN - PARTIALS */
+@import "./partials/header";
+@import "./partials/footer";
+@import "./partials/home";
+@import "./partials/habitaciones";
+@import "./partials/actividades";
+@import "./partials/contacto";
+@import "./partials/slider";
+@import "./partials/mediaqueries";

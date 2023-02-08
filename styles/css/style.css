@@ -1,0 +1,535 @@
+@charset "UTF-8";
+/* ---- SCSS ORIGEN ---- */
+/* ORIGEN - VARIABLES */
+/* ---- MISC VARIABLES ---- */
+/* ORIGEN - NORMALIZE */
+/* ---- MISC NORMALIZE ---- */
+@import url("https://fonts.googleapis.com/css2?family=Merienda&display=swap");
+/* RESET */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* GLOBALES */
+body {
+  background-image: url("../../images/pattern.png"),
+    linear-gradient(to bottom, #91e8c1, #5dab88, #01301b);
+  background-size: 25%;
+}
+body p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 22px;
+  padding: 20px 0px;
+}
+body ::selection {
+  color: #01301b;
+  background-color: #91e8c1;
+}
+
+header {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* DECARACIÓN  MIXINS */
+/* INCLUDE DE MIXINS */
+h1 {
+  font-family: "Merienda", cursive;
+  color: grey;
+  font-size: 55px;
+  padding: 20px 0px;
+}
+
+h2 {
+  font-family: "Merienda", cursive;
+  color: grey;
+  font-size: 40px;
+  padding: 20px 0px;
+}
+
+/* ORIGEN - PARTIALS */
+/* ---- PARTIAL HEADER - BORDE DE NAV Y HOVER ---- */
+.bordeParaNav {
+  border-right: solid 1px grey;
+}
+
+ul:hover a {
+  color: #91e8c1;
+}
+
+ul:hover .bordeParaNav {
+  border-right: solid 1px white;
+  transition-duration: 2s;
+}
+
+.navbar-brand:hover {
+  border: none;
+}
+
+header a:hover {
+  border-bottom: solid 1px #5dab88;
+}
+
+/* CUSTOMIZACIÓN DE CLASES BS DEL NAV */
+.bg-light {
+  --bs-bg-opacity: 0;
+  background-color: none;
+}
+
+.nav-link {
+  color: #06563b;
+  margin: 0rem 0.8rem;
+  padding: 12px 12px;
+}
+
+.navbar-expand-lg .navbar-collapse {
+  justify-content: right;
+}
+
+.navbar-toggler:hover {
+  text-decoration: none;
+  background-color: #91e8c1;
+}
+
+.navbar-brand {
+  animation-name: logoAnimado;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+}
+.navbar-brand:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(1px 4px 3px #5dab88);
+  transition: all 0.8s ease-in-out;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+  color: white;
+  background-color: #0a4d417f;
+}
+
+/* KEYFRAMES PARA ANIMACION LOGO */
+@keyframes logoAnimado {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- PARTIAL FOOTER ---- */
+footer {
+  padding-top: 2.4em;
+}
+footer img {
+  width: 40px;
+}
+footer p {
+  padding: 25px;
+}
+footer a:hover {
+  filter: drop-shadow(1px 3px 3px grey);
+  animation: popRedes 0.8s ease-in-out 1;
+}
+
+.logosRedes {
+  margin: 10px 20px;
+}
+
+@keyframes popRedes {
+  25% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(1.15);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---- PARTIAL HOME-INICIO ---- */
+/* CONTENEDOR PRINCIPAL, MAPA, SECTION  */
+.contenedor {
+  width: 95%;
+  margin: 5% auto;
+  padding: 2%;
+  background: white;
+}
+.contenedor .mapa {
+  padding: 10px 20px;
+}
+
+.opacidadHab {
+  filter: saturate(0%);
+  opacity: 0.8;
+  transition: all 0.6s ease-in;
+}
+.opacidadHab:hover {
+  opacity: 1;
+  filter: saturate(110%);
+}
+
+section {
+  padding: 5%;
+}
+
+/* SECTION CON LOS 4 ICONOS Y SU HOVER */
+section p {
+  padding-top: 30px;
+}
+
+.iconosHover {
+  transition: all 0.7s ease-in-out;
+}
+.iconosHover:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(3px 10px 8px #91e8c1);
+}
+
+/* .btnHabActivo {
+      background-color: red;
+    } */
+
+/* SLIDER */
+.carousel button:hover {
+  background: none;
+}
+
+/* ---- PARTIAL HABITACIONES ---- */
+#sectionHab {
+  padding: 0%;
+}
+
+.card {
+  border-style: none;
+  transition: all 0.5s ease-in-out;
+  margin-bottom: 1.5em;
+}
+.card h2 {
+  padding: 0.2em 0em 0.3em 0em;
+  font-size: 2.2em;
+}
+.card p {
+  padding: 0em 0em;
+  margin: 0.4em 0em;
+  font-size: 1.4em;
+}
+.card:hover {
+  scale: 1.02;
+  filter: drop-shadow(3px 10px 8px #91e8c1);
+}
+.card:hover img {
+  opacity: 0.7;
+}
+
+@media only screen and (max-width: 768px) {
+  #sectionHab {
+    margin: 0em 0.4em;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  #sectionHab {
+    margin: 0em 1em;
+  }
+}
+
+/* ---- PARTIAL ACTIVIDADES ---- */
+.flechita {
+  margin-top: 10px;
+  width: 2em;
+}
+
+.actividades {
+  padding: 1em;
+}
+.actividades:hover {
+  background-color: #e6fff3;
+}
+.actividades:hover img {
+  filter: saturate(110%);
+}
+.actividades:hover .flechita {
+  transform: rotateZ(180deg);
+  scale: 0.9;
+  filter: drop-shadow(1px 2px 3px grey);
+  transition: all 0.6s ease-in;
+}
+.actividades {
+  filter: saturate(25%);
+}
+
+/* ---- PARTIAL CONTACTO ---- */
+.contenedorForm {
+  padding: 5% 0;
+}
+
+.inputForm,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 0.5em;
+  border-color: #91e8c1;
+  margin: 15px 0px;
+  box-shadow: 0px 0px 0.5px 0.5px #91e8c1 inset;
+  transition: all 0.6s ease-in;
+}
+.inputForm:hover,
+textarea:hover {
+  background-color: #91e8c1;
+  border-color: #0a4d417f;
+}
+
+.textForm {
+  padding: 10px 5px;
+  display: block;
+}
+
+.pais {
+  width: 100%;
+  padding: 0.4em 0.6em;
+  margin: 1em 0em;
+  border-radius: 0.5em;
+  transition: all 0.6s ease-in;
+}
+.pais:hover {
+  background: #91e8c1;
+  font-style: italic;
+}
+
+button {
+  background: #91e8c1;
+  color: white;
+  border: none;
+  display: inline-block;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-radius: 0.5em;
+  transition: all 0.6s ease-in;
+}
+button:hover {
+  background: #043726;
+  font-style: italic;
+}
+
+.actividades h2 {
+  color: grey;
+}
+
+/* ////////////////////////////// PARA ENTREGA JS /////////////////////////////// */
+
+.btnHabActivo {
+  background-color: rgb(6, 152, 103);
+}
+
+#tarjetasHab h2 {
+  padding: 0.2em 0em 0.3em 0em;
+  font-size: 2em;
+}
+
+#tarjetasHab p {
+  font-size: 1.15em;
+}
+
+h3 {
+  font-family: "Merienda", cursive;
+  color: grey;
+  font-size: 36px;
+  padding: 20px 0px;
+}
+
+h4 {
+  font-family: "Merienda", cursive;
+  color: grey;
+  font-size: 24px;
+  padding: 20px 0px;
+}
+
+.form-switch {
+  padding-left: 2.5em;
+  padding-bottom: 1em;
+}
+
+.form-check {
+  margin-left: 0.6em;
+}
+
+.form-check-input:checked {
+  background-color: #91e8c1;
+  border-color: #5dab88;
+}
+
+.form-check-input:focus {
+  border-color: #e6fff3;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
+.claseBotonSeleccionadoDesabilitado {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.claseBotonSeleccionadoDesabilitado:hover {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: none;
+  background-color: none;
+}
+
+.visualizadorCarrito{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: space-evenly;
+}
+.rowItemsCheckout {
+  color: red;
+  gap: 1rem;
+}
+
+.rowItemIndividual {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+  flex-wrap: nowrap;
+}
+
+.rowItemIndividual p, strong {
+  margin: 0.5em;
+  padding: 0em 0.5em;
+  font-size: 1em;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.rowItemIndividual img {
+  height: 6rem;
+}
+
+#linkReservas{
+  font-weight: bolder;
+}
+
+#linkReservas:hover{
+   font-style: italic;  
+}
+
+/* .cadaItem{
+  padding: 0em 1em;
+  height: 100%;
+} */
+
+small {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* .estiloCheckout{
+  image-resolution: 10px;
+} */
+
+/* ////////////////////////////// /////////// /////////////////////////////// */
+
+/* ---- PARTIAL SLIDER ---- */
+#carouselHotel .controlesSlider:hover {
+  transition: 5s ease, opacity 0.5s ease-in-out;
+}
+#carouselHotel .controlesSlider:hover span {
+  width: 2.2em;
+  height: 2.2em;
+  background-color: #91e8c1;
+  border-radius: 100%;
+}
+
+.carousel-indicators {
+  color: #91e8c1;
+}
+
+.carousel-indicators .active {
+  background-color: #5dab88;
+}
+
+.slide {
+  transition: transform 5s ease, opacity 0.5s ease-in-out;
+}
+
+/* ---- PARTIAL MEDIA QUERIES ---- */
+/* BLOQUEO HOVER EN MOBILE */
+@media only screen and (min-width: 768px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #5dab88;
+    transition: all 1s ease-in;
+  }
+}
+
+/* BREAKPOINT DE MAX 768 CON CAMBIOS DE ESTILOS */
+@media only screen and (max-width: 768px) {
+  .contenedor h1 {
+    font-size: 40px;
+    padding: 18px 15px;
+  }
+  .contenedor h2 {
+    font-size: 35px;
+    padding: 18px 15px;
+  }
+  .contenedor p {
+    font-size: 18px;
+    padding: 0px 15px;
+  }
+  .navbar-nav:hover .bordeParaNav {
+    border-right: none;
+  }
+  .logosRedes {
+    margin: 30px 12px;
+  }
+  .textoFooter p {
+    font-size: 14px;
+    padding: 25px;
+  }
+  .navbar-brand img {
+    width: 70px;
+  }
+  .inputForm {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  textarea {
+    width: 100%;
+    display: block;
+  }
+  .buttonForm {
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+  }
+  .textForm {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .bordeParaNav {
+    border-right: none;
+  }
+  .navbar-nav:hover .bordeParaNav {
+    border-right: none;
+  }
+
+  /* .cadaItem {
+    padding: 0em 0.6em;
+  } */
+}
+
+

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Hotel Relax, un lugar donde relajarse con la belleza de Punta del Este y con todas las comodidades. Su ubicación permite estar a pocos metros de la playa, centros comerciales y principales lugares de atracción turística">
+    <meta name="keywords"
+        content="Hotel, Uruguay, Punta del este, Relax, Piscina, Playa, Relax, Contacto, Consulta, Cotización, Precios, Reservas, Eventos" />
+    <title>Hotel Relax - Punta del Este - Uruguay / Reservas </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">
+    <!-- Mi CSS -->
+    <link rel="stylesheet" href="../styles/css/style.css" />
+    <!-- Animate -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+
+<body>
+    <div class="container-md contenedor">
+        <header class="navbar navbar-expand-lg bg-light" style="background-color: none">
+            <!-- MENU NAV BS -->
+            <nav class="container-fluid">
+                <a class="navbar-brand" href="../index.html"><img src="../images/logo hotel.png"
+                        onmouseover="this.src='../images/logo hotel_ch.png'"
+                        onmouseout="this.src='../images/logo hotel.png'" alt="Página Contacto - Hotel Relax" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <nav class="collapse navbar-collapse align-items-center" id="navbarNavDropdown">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item bordeParaNav">
+                            <a class="nav-link" aria-current="page" href="../index.html">INICIO</a>
+                        </li>
+                        <li class="nav-item bordeParaNav">
+                            <a class="nav-link" href="../pages/info.html">INFO</a>
+                        </li>
+                        <li class="nav-item bordeParaNav">
+                            <a class="nav-link" href="../pages/habitaciones.html">HABITACIONES</a>
+                        </li>
+                        <!-- ITEM DROPDOWN -->
+                        <li class="nav-item dropdown bordeParaNav">
+                            <a class="nav-link dropdown-toggle" href="../pages/actividades.html" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="tree" aria-expanded="false">ACTIVIDADES</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../pages/actividades.html">HOME ACTIVIDADES</a></li>
+                                <li><a class="dropdown-item" href="#">Spa</a></li>
+                                <li><a class="dropdown-item" href="#">Golf</a></li>
+                                <li><a class="dropdown-item" href="#">Shows</a></li>
+                                <li><a class="dropdown-item" href="#">Niños</a></li>
+                                <li><a class="dropdown-item" href="#">Piscina</a></li>
+                                <li><a class="dropdown-item" href="#">Sauna</a></li>
+                            </ul>
+                        </li>
+                        <!-- FIN - ITEM DROPDOWN -->
+                        <li class="nav-item bordeParaNav">
+                            <a class="nav-link" href="../pages/contacto.html">CONTACTO</a>
+                        </li>
+                        <li class="nav-item bordeParaNav">
+                            <a id="linkReservas" class="nav-link" href="./pages/reservas.html">RESERVAS</a>
+                        </li>
+                    </ul>
+                </nav>
+            </nav>
+        </header>
+        <h1>Reservas</h1>
+        <p>
+            En el marco de esta preocupación por el buen desempeño ambiental,
+            asumimos elcompromiso de jerarquizar la preservación del medio ambiente,
+            prevenir toda forma de contaminación, dar cumplimiento a los requisitos
+            legales y otros requisitos ambientales vigentes, y colaborar activamente
+            en la recuperación del ecosistema de la Laguna del Sauce.
+        </p>
+        <div class="row contenedorForm reservas">
+            <h3>Su reserva</h3>
+            <div class="col-lg-4 col-md-5 col-sm-12" action="">
+                <div class="row mx-auto">
+                    <h4>Agregados</h4>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Wifi</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Desayuno</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Limpieza</label>
+                    </div>
+                    <h4>Tipo de Habitación</h4>
+                    <button id="Total" class="col-12 mx-auto buttonForm botonHab btnHabActivo">Total
+                        Habitaciones</button>
+                    <button id="Lago" class="col-12 mx-auto buttonForm botonHab">Habitacioens Lago</button>
+                    <button id="Jardin" class="col-12 mx-auto buttonForm botonHab">Habitaciones Jardín</button>
+                    <button id="checkOUT" class="col-12 mx-auto buttonForm botonHab"
+                        onclick="location.href='../pages/checkout.html'">CHECK - OUT</button>
+
+                </div>
+            </div>
+            <!-- VISUALIZADOR HABITACIONES -->
+            <div class="col-lg-8 col-md-7 col-sm-12 opacidadHab">
+                <h4 id="tituloHab">Todas las Habitaciones</h4>
+                <div id="sectionHab" class="row visualizadorHab">
+                    <!-- CARGA DE HABITACIONES MEDIANTE JS -->
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <footer class="row justify-content-center align-items-center textoFooter">
+            <div class="col-2 d-flex justify-content-center align-items-center logosRedes">
+                <a href="https://web.whatsapp.com/"><img src="../images/redes-01.png"
+                        onmouseover="this.src='../images/redes-01ch.png'" onmouseout="this.src='../images/redes-01.png'"
+                        alt="logo whatsapp" /></a>
+            </div>
+            <div class="col-2 d-flex justify-content-center align-items-center logosRedes">
+                <a href="https://facebook.com/"><img src="../images/redes-02.png"
+                        onmouseover="this.src='../images/redes-02ch.png'" onmouseout="this.src='../images/redes-02.png'"
+                        alt="logo Facebook" /></a>
+            </div>
+            <div class="col-2 d-flex justify-content-center align-items-center logosRedes">
+                <a href="https://instagram.com/"><img src="../images/redes-03.png"
+                        onmouseover="this.src='../images/redes-03ch.png'" onmouseout="this.src='../images/redes-03.png'"
+                        alt="logo Instagram" /></a>
+            </div>
+            <div class="col-12 text-center">
+                <p>
+                    Costanera Laguna del Sauce Ruta Interbalnearia | Km 116 Punta del
+                    Este, Uruguay
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <!-- MIS JS -->
+    <script src="../js/items.js"></script>
+    <script src="../js/main.js"></script>
+
+    <!-- CND de bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

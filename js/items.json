@@ -1,0 +1,68 @@
+[
+{
+    "id": 1,
+    "tipoHabitacion": "Lago",
+    "nombre": "Suite Simple vista al Lago",
+    "cama": "Queen Size",
+    "capacidad": 2,
+    "metraje": 85,
+    "precio": 100,
+    "foto": "../images/hab-01.png",
+    "adicionales": "etc"
+},
+{
+    "id": 2,
+    "tipoHabitacion": "Lago",
+    "nombre": "Superior vista al Lago",
+    "cama": "King Size",
+    "capacidad": 4,
+    "metraje": 95,
+    "precio": 150,
+    "foto": "../images/hab-02.png",
+    "adicionales": "etc"
+},
+{
+    "id": 3,
+    "tipoHabitacion": "Jardin",
+    "nombre": "Suite Simple vista al Parque",
+    "cama": "Queen Size",
+    "capacidad": 2,
+    "metraje": 110,
+    "precio": 250,
+    "foto": "../images/hab-03.png",
+    "adicionales": "etc"
+},
+{
+    "id": 4,
+    "tipoHabitacion": "Jardin",
+    "nombre": "Superior vista al Parque",
+    "cama": "King Size",
+    "capacidad": 4,
+    "metraje": 95,
+    "precio": 350,
+    "foto": "../images/hab-04.png",
+    "adicionales": "etc"
+},
+{
+    "id": 5,
+    "tipoHabitacion": "Jardin",
+    "nombre": "Deluxe Simple vista al Parque",
+    "cama": "Queen Size",
+    "capacidad": 2,
+    "metraje": 95,
+    "precio": 450,
+    "foto": "../images/hab-05.jpeg",
+    "adicionales": "etc"
+},
+{
+    "id": 6,
+    "tipoHabitacion": "Jardin",
+    "nombre": "Presidencial vista al Parque",
+    "cama": "King Size",
+    "capacidad": 4,
+    "metraje": 110,
+    "precio": 550,
+    "foto": "../images/hab-06.jpeg",
+    "adicionales": "etc"
+}
+]

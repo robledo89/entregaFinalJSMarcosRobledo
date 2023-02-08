@@ -1,0 +1,55 @@
+/* ---- PARTIAL CONTACTO ---- */
+
+.contenedorForm{
+    padding: 5% 0;
+}
+
+.inputForm, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: $borders;
+    border-color: $primarioVerde;
+    margin: 15px 0px;
+    box-shadow: 0px 0px 0.5px 0.5px $primarioVerde inset;
+    transition: $animaBotones;
+    &:hover {
+        background-color: $primarioVerde;
+        border-color: $secundarioVerde;
+    }
+}
+
+.textForm {
+    padding: 10px 5px;
+    display: block;
+}
+
+.pais{
+    width: 100%;
+    padding: 0.4em 0.6em;
+    margin: 1em 0em;
+    border-radius: $borders;
+    transition: $animaBotones;
+    &:hover {
+        background: $primarioVerde;
+        font-style: italic;
+    }    
+}
+
+button {
+    background: $primarioVerde;
+    color: $colorBlanco;
+    border: none;
+    display: inline-block;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-radius: $borders;
+    transition: $animaBotones;
+    &:hover {
+        background: $tercearioVerde;
+        font-style: italic;
+    }    
+}
+
+.actividades h2 {
+    color: grey;
+}
