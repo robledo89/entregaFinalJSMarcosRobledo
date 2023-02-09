@@ -1,4 +1,4 @@
-///////////////// CARRITO/VISUALIZADOR HABITACIONES Y CHEQUEO NULL /////////////////////////
+///////////////// ARRAYS Y CARGA JSON MEDIANTE FETCH /////////////////////////
 let carritoArray = [];
 let visualizadorHabArray = [];
 
@@ -9,32 +9,24 @@ fetch("../js/items.json")
         cargaVisualizador(visualizadorHabArray);
     })
 
-//////////////////////// OPERADOR AVANZADO //////////////////////////
+//////////////////////// DOM //////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
     carritoArray = carritoArray = JSON.parse(localStorage.getItem("carritoArray")) || [];
     //crearCheckout();
     chequeosTextos();
 })
 
-/////////////////////////////////////////////////////////////////////
 //////////////////////// SELECTORES QUERYS //////////////////////////
-
 const visualizadorHabitaciones = document.querySelector(".visualizadorHab");
 const seleccionHabitacion = document.querySelectorAll(".botonHab");
 const tituloParaHabitaciones = document.querySelector("#tituloHab");
 let botonSeleccionado = document.querySelectorAll(".claseBotonSeleccionado");
 const visualizadorCarrito = document.querySelector(".visualizadorCarrito");
-
-const textoReservaVacia = document.querySelector(".textoReservaVacia");
+const textoReserva = document.querySelector(".textoReserva");
 //const textoContenidoCarrito = document.querySelector(".textoContenidoCarrito");
-
 const reservas = document.querySelector(".reservas");
 const checkout = document.querySelector(".checkout");
-
 const vaciar = document.querySelector("#vaciar");
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
 
 /////////////// CARGAR HABITACIONES AL DIV EN RESERVAS //////////////
 function cargaVisualizador(tipoHabSeleccionada) {
@@ -63,11 +55,9 @@ function cargaVisualizador(tipoHabSeleccionada) {
 ////////////// MOSTRAR TIPO HABITACIONES SEGUN CATEGORIA //////////////
 seleccionHabitacion.forEach(botonTipoHab => {
     botonTipoHab.addEventListener("click", (e) => {
-
         // RELLENA BACKGROUND DE COLOR EL BTN ACTIVADO
         seleccionHabitacion.forEach(botonTipoHab => botonTipoHab.classList.remove("btnHabActivo"));
         e.currentTarget.classList.add("btnHabActivo");
-
         // FILTRO TIPO DE HABITACION MEDIANTE IF
         if (e.currentTarget.id != "Total") {
             if (e.currentTarget.id === "Lago") {
@@ -123,7 +113,6 @@ function sumarAlCarrito(e) {
 
 ///////////////// CARGAR ITEMS AL CARRITO //////////////////
 function crearCheckout() {
-    chequeosTextos();
     visualizadorCarrito.innerHTML = '';
     carritoArray.forEach(elementos => {
         let div = document.createElement('div');
@@ -155,8 +144,7 @@ function crearCheckout() {
                             <div class="cadaItem eliminarItemCarritoContenedor">
                                 <button id="${elementos.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarrito">Eliminar</button>
                             </div>
-            `
-            ;
+            `;
         visualizadorCarrito.append(div);
         const quitarItem = document.querySelectorAll(".eliminarItemCarrito");
         quitarItem.forEach((button) => {
@@ -186,22 +174,22 @@ function eliminar(e) {
         },
         onClick: function () { }
     }).showToast();
-    crearCheckout();
-    //chequeosTextos();
+    //crearCheckout();
+    chequeosTextos();
 }
 
 ///////////// VACIAR TOTAL CARRITO ////////////
 vaciar.addEventListener("click", avisoVaciado)
-
 function vaciarCarrito() {
     carritoArray.length = 0;
     localStorage.setItem("carritoArray", JSON.stringify(carritoArray));
-    crearCheckout();
+    //crearCheckout();
+    chequeosTextos()
 }
 
 ///////////// SWEET ALERTS ////////////
 
-// AVISO CUANDO VACÍA EL CARRITO Y LLAMA A FUNCION DE VACIAR
+// AVISO VACIADO
 function avisoVaciado() {
     if (carritoArray.length !== 0) {
         Swal.fire({
@@ -230,6 +218,7 @@ function avisoVaciado() {
     }
 }
 
+// AVISO VACIADO ERROR
 function avisoVaciadoError() {
     Swal.fire({
         title: 'Error',
@@ -240,6 +229,7 @@ function avisoVaciadoError() {
     })
 }
 
+// AVISO HABITACION YA SELECCIONADA
 function avisoHabYaSeleccionada() {
     Swal.fire({
         title: 'Error',
@@ -252,17 +242,17 @@ function avisoHabYaSeleccionada() {
 
 ///////////// CONSULTA PARA APLICAR TEXTO EN CHECK-OUT ////////////
 function chequeosTextos() {
-    // Para HTML checkout
+    // PARA HTML CHECK-OUT
     if (checkout) {
         let contenidoCarrito = JSON.parse(localStorage.getItem("carritoArray"))
         if (contenidoCarrito != 0) {
-            textoReservaVacia.innerHTML = "Listado de reseva";
+            textoReserva.innerHTML = "Detalles de su reserva";
         } else {
-            textoReservaVacia.innerHTML = "Carrito vacío";
+            textoReserva.innerHTML = "Su carrito está vacío";
         }
-        //crearCheckout();
+        crearCheckout();
     }
-    // Para HTML Reservas
+    // PARA HTML RESERVAS
     if (reservas) {
         cargaVisualizador(visualizadorHabArray);
     }
