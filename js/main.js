@@ -12,8 +12,8 @@ fetch("../js/items.json")
 //////////////////////// OPERADOR AVANZADO //////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
     carritoArray = carritoArray = JSON.parse(localStorage.getItem("carritoArray")) || [];
-    crearCheckout();
-    //chequeosTextos();
+    //crearCheckout();
+    chequeosTextos();
 })
 
 /////////////////////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ let botonSeleccionado = document.querySelectorAll(".claseBotonSeleccionado");
 const visualizadorCarrito = document.querySelector(".visualizadorCarrito");
 
 const textoReservaVacia = document.querySelector(".textoReservaVacia");
-const textoContenidoCarrito = document.querySelector(".textoContenidoCarrito");
+//const textoContenidoCarrito = document.querySelector(".textoContenidoCarrito");
 
 const reservas = document.querySelector(".reservas");
 const checkout = document.querySelector(".checkout");
@@ -99,8 +99,7 @@ function sumarAlCarrito(e) {
     const idHab = e.currentTarget.id;
     const habSeleccionada = visualizadorHabArray.find(habitacion => habitacion.id == idHab)
     if (carritoArray != 0) {
-        // avisoHabYaSeleccionada();
-        alert("Ya eligió");
+        avisoHabYaSeleccionada();
     } else {
         Toastify({
             text: "Agregado al carrito",
@@ -124,6 +123,7 @@ function sumarAlCarrito(e) {
 
 ///////////////// CARGAR ITEMS AL CARRITO //////////////////
 function crearCheckout() {
+    chequeosTextos();
     visualizadorCarrito.innerHTML = '';
     carritoArray.forEach(elementos => {
         let div = document.createElement('div');
@@ -186,10 +186,8 @@ function eliminar(e) {
         },
         onClick: function () { }
     }).showToast();
-    chequeosTextos();
-
     crearCheckout();
-
+    //chequeosTextos();
 }
 
 ///////////// VACIAR TOTAL CARRITO ////////////
@@ -258,9 +256,9 @@ function chequeosTextos() {
     if (checkout) {
         let contenidoCarrito = JSON.parse(localStorage.getItem("carritoArray"))
         if (contenidoCarrito != 0) {
-            textoReservaVacia.remove();
+            textoReservaVacia.innerHTML = "Listado de reseva";
         } else {
-            textoContenidoCarrito.remove();
+            textoReservaVacia.innerHTML = "Carrito vacío";
         }
         //crearCheckout();
     }
@@ -270,7 +268,7 @@ function chequeosTextos() {
     }
 }
 
-chequeosTextos();
+//chequeosTextos();
 
 
 
