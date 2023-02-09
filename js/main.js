@@ -3,17 +3,17 @@ let carritoArray = [];
 let visualizadorHabArray = [];
 
 fetch("../js/items.json")
-.then(response => response.json())
-.then(data => {
-    console.log(data);
-    visualizadorHabArray = data;
-    cargaVisualizador(visualizadorHabArray);
-})
+    .then(response => response.json())
+    .then(data => {
+        visualizadorHabArray = data;
+        cargaVisualizador(visualizadorHabArray);
+    })
 
 //////////////////////// OPERADOR AVANZADO //////////////////////////
-window.addEventListener("DOMContentLoaded",() => {
+window.addEventListener("DOMContentLoaded", () => {
     carritoArray = carritoArray = JSON.parse(localStorage.getItem("carritoArray")) || [];
     crearCheckout();
+    //chequeosTextos();
 })
 
 /////////////////////////////////////////////////////////////////////
@@ -60,9 +60,10 @@ function cargaVisualizador(tipoHabSeleccionada) {
     funcionHabSeleccionar();
 }
 
-////////////// MOSTRAR TIPO HABITACIONES SEGUN ELECCION //////////////
+////////////// MOSTRAR TIPO HABITACIONES SEGUN CATEGORIA //////////////
 seleccionHabitacion.forEach(botonTipoHab => {
     botonTipoHab.addEventListener("click", (e) => {
+
         // RELLENA BACKGROUND DE COLOR EL BTN ACTIVADO
         seleccionHabitacion.forEach(botonTipoHab => botonTipoHab.classList.remove("btnHabActivo"));
         e.currentTarget.classList.add("btnHabActivo");
@@ -95,26 +96,30 @@ function funcionHabSeleccionar() {
 
 ///////////////// FUNCION PARA SUMAR ITEMS AL CARRITO //////////////////
 function sumarAlCarrito(e) {
-    Toastify({
-        text: "Agregado al carrito",
-        duration: 2500,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        close: false,
-        gravity: "down", 
-        position: "right", 
-        stopOnFocus: true, 
-        style: {
-        borderRadius: "0.8rem",
-          background: "linear-gradient(to top, #91e8c1, #69e1ab)",
-        },
-        onClick: function(){}
-    }).showToast();
     const idHab = e.currentTarget.id;
     const habSeleccionada = visualizadorHabArray.find(habitacion => habitacion.id == idHab)
-    carritoArray.push(habSeleccionada);
-
-    localStorage.setItem("carritoArray", JSON.stringify(carritoArray));
+    if (carritoArray != 0) {
+        // avisoHabYaSeleccionada();
+        alert("Ya eligió");
+    } else {
+        Toastify({
+            text: "Agregado al carrito",
+            duration: 2500,
+            destination: "../pages/checkout.html",
+            newWindow: true,
+            close: false,
+            gravity: "down",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                borderRadius: "0.8rem",
+                background: "linear-gradient(to top, #91e8c1, #69e1ab)",
+            },
+            onClick: function () { }
+        }).showToast();
+        carritoArray.push(habSeleccionada);
+        localStorage.setItem("carritoArray", JSON.stringify(carritoArray));
+    }
 }
 
 ///////////////// CARGAR ITEMS AL CARRITO //////////////////
@@ -123,7 +128,7 @@ function crearCheckout() {
     carritoArray.forEach(elementos => {
         let div = document.createElement('div');
         div.classList.add("rowItemIndividual");
-        div.innerHTML =`
+        div.innerHTML = `
                             <div class="cadaItem">
                                 <img src="${elementos.foto}" alt=""/>                        
                             </div>
@@ -147,7 +152,7 @@ function crearCheckout() {
                                 <small>Precio</small>
                                 <p>U$S ${elementos.precio}</p>
                             </div>
-                            <div class="cadaItem">
+                            <div class="cadaItem eliminarItemCarritoContenedor">
                                 <button id="${elementos.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarrito">Eliminar</button>
                             </div>
             `
@@ -155,34 +160,36 @@ function crearCheckout() {
         visualizadorCarrito.append(div);
         const quitarItem = document.querySelectorAll(".eliminarItemCarrito");
         quitarItem.forEach((button) => {
-          button.addEventListener("click", eliminar);
+            button.addEventListener("click", eliminar);
         });
     });
 };
 
 ///////////// ELIMINAR ITEM INDIVIDUAL DE CARRITO ////////////
-function eliminar (e) {   
-    
-        const itemEliminar = e.target.closest(".eliminarItemCarrito").getAttribute("id");
-        carritoArray = carritoArray.filter((impresion) => impresion.id != itemEliminar);
-        const carro = JSON.stringify(carritoArray);
-        localStorage.setItem("carritoArray", carro);
-        Toastify({
-            text: "Eliminado",
-            duration: 2500,
-            destination: "https://github.com/apvarun/toastify-js",
-            newWindow: true,
-            close: false,
-            gravity: "down", // `top` or `bottom`
-            position: "right", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
+function eliminar(e) {
+    const itemEliminar = e.target.closest(".eliminarItemCarrito").getAttribute("id");
+    carritoArray = carritoArray.filter((impresion) => impresion.id != itemEliminar);
+    const carro = JSON.stringify(carritoArray);
+    localStorage.setItem("carritoArray", carro);
+    Toastify({
+        text: "Eliminado",
+        duration: 2500,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: false,
+        gravity: "down",
+        position: "right",
+        stopOnFocus: true,
+        style: {
             borderRadius: "0.8rem",
-              background: "linear-gradient(to top, #91e8c1, #69e1ab)",
-            },
-            onClick: function(){} // Callback after click
-        }).showToast();
-        crearCheckout();
+            background: "linear-gradient(to top, #91e8c1, #69e1ab)",
+        },
+        onClick: function () { }
+    }).showToast();
+    chequeosTextos();
+
+    crearCheckout();
+
 }
 
 ///////////// VACIAR TOTAL CARRITO ////////////
@@ -197,58 +204,73 @@ function vaciarCarrito() {
 ///////////// SWEET ALERTS ////////////
 
 // AVISO CUANDO VACÍA EL CARRITO Y LLAMA A FUNCION DE VACIAR
-function avisoVaciado (){
-  Swal.fire({
-    title: '¿Desea eliminar su reserva?',
-    text: 'ATENCIÓN: El vaciado de su carrito es permanente',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#06563b',
-    cancelButtonColor: '#01301b',
-    cancelButtonText: 'Cancelar',
-    confirmButtonText: 'Eliminar'    
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: 'Eliminado',
-        text: 'Su carrito ha sido vaciado por completo',
-        icon: 'success',
-        confirmButtonColor: '#06563b',
-        confirmButtonText: 'Aceptar' 
+function avisoVaciado() {
+    if (carritoArray.length !== 0) {
+        Swal.fire({
+            title: '¿Desea eliminar su reserva?',
+            text: 'ATENCIÓN: El vaciado de su carrito es permanente',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#06563b',
+            cancelButtonColor: '#01301b',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Eliminar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Eliminado',
+                    text: 'Su carrito ha sido vaciado por completo',
+                    icon: 'success',
+                    confirmButtonColor: '#06563b',
+                    confirmButtonText: 'Aceptar'
+                })
+                vaciarCarrito();
+            }
         })
-      vaciarCarrito();
-    }
-  })
-}
-
-///////////// CONSULTA PARA APLICAR FUNCIONES ////////////
-// Para checkout
-if (checkout) {
-    if (localStorage.getItem("carritoArray") !== null) {
-        textoReservaVacia.remove();
     } else {
-        textoContenidoCarrito.remove();
+        avisoVaciadoError();
     }
-    crearCheckout();
-}
-// Para Reservas
-if (reservas) {
-    cargaVisualizador(visualizadorHabArray);
 }
 
-// if (localStorage.getItem("carritoArray") === null) {
-    // }
-    // else {
-    //     carritoArray = JSON.parse(localStorage.getItem("carritoArray"));
-    // }
-    
-    // if (localStorage.getItem("carritoArray") === null) {
-    // }
-    // else {
-    //     carritoArray = JSON.parse(localStorage.getItem("carritoArray"));
-    // }
+function avisoVaciadoError() {
+    Swal.fire({
+        title: 'Error',
+        text: 'ATENCIÓN: Su carrito ya se encuentra vacío',
+        icon: 'warning',
+        confirmButtonColor: '#06563b',
+        confirmButtonText: 'Aceptar'
+    })
+}
 
-// FALTA
-// API
-// 
+function avisoHabYaSeleccionada() {
+    Swal.fire({
+        title: 'Error',
+        text: 'ATENCIÓN: Ya eligió Habitación',
+        icon: 'warning',
+        confirmButtonColor: '#06563b',
+        confirmButtonText: 'Aceptar'
+    })
+}
+
+///////////// CONSULTA PARA APLICAR TEXTO EN CHECK-OUT ////////////
+function chequeosTextos() {
+    // Para HTML checkout
+    if (checkout) {
+        let contenidoCarrito = JSON.parse(localStorage.getItem("carritoArray"))
+        if (contenidoCarrito != 0) {
+            textoReservaVacia.remove();
+        } else {
+            textoContenidoCarrito.remove();
+        }
+        //crearCheckout();
+    }
+    // Para HTML Reservas
+    if (reservas) {
+        cargaVisualizador(visualizadorHabArray);
+    }
+}
+
+chequeosTextos();
+
+
 
