@@ -1,0 +1,17 @@
+[
+{
+    "id": 7,
+    "nombre": "Wifi",
+    "precio": 15
+},
+{
+    "id": 8,
+    "nombre": "Desayuno",
+    "precio": 20
+},
+{
+    "id": 9,
+    "nombre": "Limpieza",
+    "precio": 25
+}
+]

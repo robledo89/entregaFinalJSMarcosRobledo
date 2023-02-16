@@ -1,6 +1,7 @@
 ///////////////// ARRAYS Y CARGA JSON MEDIANTE FETCH /////////////////////////
-let carritoArray = [];
 let visualizadorHabArray = [];
+let carritoArray = [];
+let agregadosArray = [];
 
 fetch("../js/items.json")
     .then(response => response.json())
@@ -9,10 +10,18 @@ fetch("../js/items.json")
         cargaVisualizador(visualizadorHabArray);
     })
 
-//////////////////////// DOM //////////////////////////
+fetch("../js/agregados.json")
+    .then(response => response.json())
+    .then(data => {
+        agregadosArray = data;
+        //cargaVisualizador(agregadosArray);
+    })
+
+console.log("Agregados: ", agregadosArray)
+
+//////////////////////// DOM - CARGA DE ITEMS //////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
     carritoArray = carritoArray = JSON.parse(localStorage.getItem("carritoArray")) || [];
-    //crearCheckout();
     chequeosTextos();
 })
 
@@ -23,10 +32,10 @@ const tituloParaHabitaciones = document.querySelector("#tituloHab");
 let botonSeleccionado = document.querySelectorAll(".claseBotonSeleccionado");
 const visualizadorCarrito = document.querySelector(".visualizadorCarrito");
 const textoReserva = document.querySelector(".textoReserva");
-//const textoContenidoCarrito = document.querySelector(".textoContenidoCarrito");
 const reservas = document.querySelector(".reservas");
 const checkout = document.querySelector(".checkout");
 const vaciar = document.querySelector("#vaciar");
+const factura = document.querySelector("#checkOutFinal");
 
 /////////////// CARGAR HABITACIONES AL DIV EN RESERVAS //////////////
 function cargaVisualizador(tipoHabSeleccionada) {
@@ -113,6 +122,7 @@ function sumarAlCarrito(e) {
 
 ///////////////// CARGAR ITEMS AL CARRITO //////////////////
 function crearCheckout() {
+    //facturaFinal();
     visualizadorCarrito.innerHTML = '';
     carritoArray.forEach(elementos => {
         let div = document.createElement('div');
@@ -174,16 +184,14 @@ function eliminar(e) {
         },
         onClick: function () { }
     }).showToast();
-    //crearCheckout();
     chequeosTextos();
 }
 
-///////////// VACIAR TOTAL CARRITO ////////////
+///////////// VACIADO TOTAL CARRITO ////////////
 vaciar.addEventListener("click", avisoVaciado)
 function vaciarCarrito() {
     carritoArray.length = 0;
     localStorage.setItem("carritoArray", JSON.stringify(carritoArray));
-    //crearCheckout();
     chequeosTextos()
 }
 
@@ -240,9 +248,9 @@ function avisoHabYaSeleccionada() {
     })
 }
 
-///////////// CONSULTA PARA APLICAR TEXTO EN CHECK-OUT ////////////
+///////////// CONSULTA PARA APLICAR TEXTOS ////////////
 function chequeosTextos() {
-    // PARA HTML CHECK-OUT
+    ///////// PARA HTML CHECK-OUT
     if (checkout) {
         let contenidoCarrito = JSON.parse(localStorage.getItem("carritoArray"))
         if (contenidoCarrito != 0) {
@@ -252,13 +260,48 @@ function chequeosTextos() {
         }
         crearCheckout();
     }
-    // PARA HTML RESERVAS
+    ///////// PARA HTML RESERVAS
     if (reservas) {
         cargaVisualizador(visualizadorHabArray);
     }
 }
 
-//chequeosTextos();
+///////////////// FUNCION EMITIR FACTURA EN ALERT //////////////
+function guardarFactura(){
+
+const facturaEnAlert = document.querySelector("#checkOutFinal");
+facturaEnAlert.forEach((input) => {
+    input.addEventListener("click", facturaFinal);
+    });
+}
+
+guardarFactura();
+
+function facturaFinal() {
+    let factura3 = carritoArray.find(carritoArray => carritoArray.precio === '100');
+    //let factura2 = JSON.parse(localStorage.getItem("carritoArray"))
+    console.log("factura precio:", factura3);
+}
+
+
+
+
+
+///////////////// FUNCION DE BOTONES AGREGADOS //////////////
+function botonesAgregados() {
+    let inputWifi = document.querySelectorAll(".botonWifi");
+    inputWifi.forEach(input => {
+        input.addEventListener("click", sumarAgregado);
+    })
+}
+
+function sumarAgregado(e){
+    const agregarWifi = e.target.closest(".eliminarItemCarrito").getAttribute("id");
+    agregadosArray = agregadosArray.filter((impresion) => impresion.id != agregarWifi);
+    const agregado = JSON.stringify(agregadosArray);
+    localStorage.setItem("agregadosArray", agregado);
+}
+
 
 
 
