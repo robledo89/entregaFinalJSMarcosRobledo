@@ -13,9 +13,9 @@ fetch("../js/items.json")
 fetch("../js/agregados.json")
     .then(response => response.json(agregadosArray))
     .then(data => {
-    agregadosArray = data;
-    console.log("Agregados: ", agregadosArray)
-})
+        agregadosArray = data;
+        console.log("Agregados: ", agregadosArray)
+    })
 
 //////////////////////// DOM - CARGA DE ITEMS //////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
@@ -34,9 +34,7 @@ const reservas = document.querySelector(".reservas");
 const checkout = document.querySelector(".checkout");
 const vaciar = document.querySelector("#vaciar");
 const factura = document.querySelector("#checkOutFinal");
-
 const checkOutFinal = document.querySelector("#checkOutFinal");
-
 
 /////////////// CARGAR HABITACIONES AL DIV EN RESERVAS.HTML //////////////
 function cargaVisualizador(tipoHabSeleccionada) {
@@ -123,7 +121,6 @@ function sumarAlCarrito(e) {
 
 ///////////////// CARGAR ITEMS AL CARRITO //////////////////
 function crearCheckout() {
-    //facturaFinal();
     visualizadorCarrito.innerHTML = '';
     carritoArray.forEach(elementos => {
         let div = document.createElement('div');
@@ -231,7 +228,7 @@ function avisoVaciado() {
 function avisoVaciadoError() {
     Swal.fire({
         title: 'Error',
-        text: 'ATENCIÓN: Su carrito ya se encuentra vacío',
+        text: 'ATENCIÓN: Su carrito se encuentra vacío',
         icon: 'warning',
         confirmButtonColor: '#06563b',
         confirmButtonText: 'Aceptar'
@@ -267,33 +264,43 @@ function chequeosTextos() {
     }
 }
 
-///////////////// FUNCION EMITIR FACTURA EN ALERT //////////////
+///////////////// FUNCION DE BOTONES AGREGADOS //////////////
+// function botonesAgregados() {
+//     inputWifi = document.querySelectorAll(".botonWifi");
+//     console.log(inputWifi)
+   
+//     inputWifi.addEventListener('input', sumarAgregado);
+// }
+
+
+// function sumarAgregado(e) {
+//     const idAgregado = e.currentTarget.id;
+//     const agregadoSeleccionado = visualizadorHabArray.find(habitacion => habitacion.id == idAgregado)
+ 
+//     agregadosArray.push(agregadoSeleccionado)
+// }
+
+// botonesAgregados();
+
+///////////////// FUNCION EMITIR FACTURA FINAL EN SW ALERT //////////////
 checkOutFinal.addEventListener("click", facturaFinal);
 
 function facturaFinal() {
-    const factura3 = carritoArray.find(item => item.precio == precio);
-    //factura3 = JSON.parse(localStorage.getItem("carritoArray"))
-    console.log("factura precio:", factura3);
-    alert("Ok");
-}
-
-
-
-
-
-///////////////// FUNCION DE BOTONES AGREGADOS //////////////
-function botonesAgregados() {
-    let inputWifi = document.querySelectorAll(".botonWifi");
-    inputWifi.forEach(input => {
-        input.addEventListener("click", sumarAgregado);
-    })
-}
-
-function sumarAgregado(e){
-    const agregarWifi = e.target.closest(".eliminarItemCarrito").getAttribute("id");
-    agregadosArray = agregadosArray.filter((impresion) => impresion.id != agregarWifi);
-    const agregado = JSON.stringify(agregadosArray);
-    localStorage.setItem("agregadosArray", agregado);
+    if (carritoArray.length !== 0) {
+        const factura = carritoArray.reduce((acumulador, precioItem) => acumulador + (precioItem.precio * 1.22), 0);
+        console.log("factura precio:", factura);
+        Swal.fire({
+            title: 'Factura emitida :)',
+            html: 'Detalle factura: U$S ' + factura + ' IVA INC.<br><br>¡Los esperamos!<br><br>: : :  Hotel Relax - Punta del Este  : : :',
+            imageUrl: '../images/logo hotel.png',
+            imageAlt: 'Logo Hotel - Factura',
+            icon: 'success',
+            confirmButtonColor: '#06563b',
+            confirmButtonText: 'Aceptar'
+        })
+    } else {
+        avisoVaciadoError();
+    }
 }
 
 
