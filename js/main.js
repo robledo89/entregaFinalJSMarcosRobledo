@@ -11,13 +11,11 @@ fetch("../js/items.json")
     })
 
 fetch("../js/agregados.json")
-    .then(response => response.json())
+    .then(response => response.json(agregadosArray))
     .then(data => {
-        agregadosArray = data;
-        //cargaVisualizador(agregadosArray);
-    })
-
-console.log("Agregados: ", agregadosArray)
+    agregadosArray = data;
+    console.log("Agregados: ", agregadosArray)
+})
 
 //////////////////////// DOM - CARGA DE ITEMS //////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
@@ -37,7 +35,10 @@ const checkout = document.querySelector(".checkout");
 const vaciar = document.querySelector("#vaciar");
 const factura = document.querySelector("#checkOutFinal");
 
-/////////////// CARGAR HABITACIONES AL DIV EN RESERVAS //////////////
+const checkOutFinal = document.querySelector("#checkOutFinal");
+
+
+/////////////// CARGAR HABITACIONES AL DIV EN RESERVAS.HTML //////////////
 function cargaVisualizador(tipoHabSeleccionada) {
     visualizadorHabitaciones.innerHTML = '';
     tipoHabSeleccionada.forEach(elementos => {
@@ -267,20 +268,13 @@ function chequeosTextos() {
 }
 
 ///////////////// FUNCION EMITIR FACTURA EN ALERT //////////////
-function guardarFactura(){
-
-const facturaEnAlert = document.querySelector("#checkOutFinal");
-facturaEnAlert.forEach((input) => {
-    input.addEventListener("click", facturaFinal);
-    });
-}
-
-guardarFactura();
+checkOutFinal.addEventListener("click", facturaFinal);
 
 function facturaFinal() {
-    let factura3 = carritoArray.find(carritoArray => carritoArray.precio === '100');
-    //let factura2 = JSON.parse(localStorage.getItem("carritoArray"))
+    const factura3 = carritoArray.find(item => item.precio == precio);
+    //factura3 = JSON.parse(localStorage.getItem("carritoArray"))
     console.log("factura precio:", factura3);
+    alert("Ok");
 }
 
 
