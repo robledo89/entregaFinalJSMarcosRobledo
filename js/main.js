@@ -4,6 +4,8 @@ let visualizadorAgrArray = [];
 let carritoArray = [];
 let carritoAgregados = [];
 
+let prueba = [];
+
 fetch("../js/items.json")
     .then(response => response.json())
     .then(data => {
@@ -164,38 +166,38 @@ function crearCheckout() {
     });
 };
 
-function crearAgregados() {    
-    const prueba = JSON.parse(localStorage.getItem("carritoAgregados"))
+function crearAgregados() {
+    prueba = JSON.parse(localStorage.getItem("carritoAgregados"))
     //console.log("prueba", prueba) //ok  
     visualizadorCarritoAgr.innerHTML = '';
-    prueba.forEach(elementos => {
+    prueba.forEach(agregado => {
         let div = document.createElement('div');
         div.classList.add("rowItemIndividual");
         visualizadorCarritoAgr.innerHTML = `
                             <div class="rowItemIndividual">
                                 <div class="cadaItem">
                                     <small>ID</small>
-                                    <strong>${elementos.id}</strong>
+                                    <strong>${agregado.id}</strong>
                                 </div>
                                 <div class="cadaItem">
                                     <small>Tipo</small>
-                                    <strong>${elementos.nombre}</strong>
+                                    <strong>${agregado.nombre}</strong>
                                 </div>
                                 <div class="cadaItem">
                                     <small>Precio</small>
-                                    <p>U$S ${elementos.precio}</p>
+                                    <p>U$S ${agregado.precio}</p>
                                 </div>
                                 <div class="cadaItem eliminarItemCarritoContenedor">
-                                    <button id="${elementos.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarrito">Eliminar</button>
+                                    <button id="${agregado.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarritoAgr">Eliminar</button>
                                 </div>
                             </div>
                             `
     })
     visualizadorCarritoAgr.append(div);
-    const quitarItem = document.querySelectorAll(".eliminarItemCarrito");
-        quitarItem.forEach((button) => {
-            button.addEventListener("click", eliminarAgr);
-        });
+    const quitarItemAgr = document.querySelectorAll(".eliminarItemCarritoAgr");
+    quitarItemAgr.forEach((button) => {
+        button.addEventListener("click", eliminarAgr);
+    });
 }
 
 ///////////////// FUNCION DE BOTONES AGREGADOS //////////////
@@ -219,7 +221,7 @@ function sumarAgregado(e) {
             agregadoAviso();
             carritoAgregados.push(agregadoSeleccionado)
             localStorage.setItem("carritoAgregados", JSON.stringify(carritoAgregados));
-        }        
+        }
     }
 }
 
@@ -248,10 +250,10 @@ function eliminar(e) {
 
 ///////////// ELIMINAR AGREGADO DE CARRITO ////////////
 function eliminarAgr(e) {
-    const itemEliminar = e.target.closest(".eliminarItemCarrito").getAttribute("id");
-    carritoAgregados = carritoAgregados.filter((impresion) => impresion.id != itemEliminar);
-    const carro = JSON.stringify(carritoAgregados);
-    localStorage.setItem("carritoAgregados", carro);
+    const itemEliminarAgr = e.target.closest(".eliminarItemCarritoAgr").getAttribute("id");
+    carritoAgregados = carritoAgregados.filter((agregado) => agregado.id != itemEliminarAgr);
+    const carroAgr = JSON.stringify(carritoAgregados);
+    localStorage.setItem("carritoAgregados", carroAgr);
     Toastify({
         text: "Eliminado",
         duration: 2500,
@@ -354,7 +356,7 @@ function avisoPrimeroHab() {
     })
 }
 
-function agregadoAviso(){
+function agregadoAviso() {
     Toastify({
         text: "Agregado al carrito",
         duration: 2500,
@@ -381,8 +383,9 @@ function chequeosTextos() {
             textoReserva.innerHTML = "Detalles de su reserva";
         } else {
             textoReserva.innerHTML = "Su carrito está vacío";
-        }
+        }       
         crearCheckout();
+        crearAgregados();
     }
     ///////// PARA HTML RESERVAS
     if (reservas) {
