@@ -1,7 +1,8 @@
 ///////////////// ARRAYS Y CARGA JSON MEDIANTE FETCH /////////////////////////
 let visualizadorHabArray = [];
+let visualizadorAgrArray = [];
 let carritoArray = [];
-let agregadosArray = [];
+let carritoAgregados = [];
 
 fetch("../js/items.json")
     .then(response => response.json())
@@ -11,10 +12,9 @@ fetch("../js/items.json")
     })
 
 fetch("../js/agregados.json")
-    .then(response => response.json(agregadosArray))
+    .then(response => response.json(visualizadorAgrArray))
     .then(data => {
-        agregadosArray = data;
-        console.log("Agregados: ", agregadosArray)
+        visualizadorAgrArray = data;
     })
 
 //////////////////////// DOM - CARGA DE ITEMS //////////////////////////
@@ -29,11 +29,12 @@ const seleccionHabitacion = document.querySelectorAll(".botonHab");
 const tituloParaHabitaciones = document.querySelector("#tituloHab");
 let botonSeleccionado = document.querySelectorAll(".claseBotonSeleccionado");
 const visualizadorCarrito = document.querySelector(".visualizadorCarrito");
+const visualizadorCarritoAgr = document.querySelector("#visualizadorCarritoAgr");
 const textoReserva = document.querySelector(".textoReserva");
 const reservas = document.querySelector(".reservas");
 const checkout = document.querySelector(".checkout");
-const vaciar = document.querySelector("#vaciar");
-const factura = document.querySelector("#checkOutFinal");
+const vaciarHab = document.querySelector("#vaciar");
+const vaciarAgr = document.querySelector("#vaciarAgr");
 const checkOutFinal = document.querySelector("#checkOutFinal");
 
 /////////////// CARGAR HABITACIONES AL DIV EN RESERVAS.HTML //////////////
@@ -50,7 +51,7 @@ function cargaVisualizador(tipoHabSeleccionada) {
                     <p>Cama: ${elementos.cama}</p>
                     <p>Capacidad (personas): ${elementos.capacidad}</p>
                     <p>Size: ${elementos.metraje} m²</p>
-                    <p>Precio: $ ${elementos.precio}</p>
+                    <p>Precio: U$S ${elementos.precio}</p>
                     <button name="tarjetas" id= "${elementos.id}" class="col-12 mx-auto buttonForm botonHab claseBotonSeleccionado">Seleccionar</button>
                 </div>
         </div>
@@ -58,6 +59,7 @@ function cargaVisualizador(tipoHabSeleccionada) {
         visualizadorHabitaciones.append(div);
     })
     funcionHabSeleccionar();
+    botonesAgregados();
 }
 
 ////////////// MOSTRAR TIPO HABITACIONES SEGUN CATEGORIA //////////////
@@ -121,6 +123,7 @@ function sumarAlCarrito(e) {
 
 ///////////////// CARGAR ITEMS AL CARRITO //////////////////
 function crearCheckout() {
+    //console.log("CarritoHAB", carritoArray)
     visualizadorCarrito.innerHTML = '';
     carritoArray.forEach(elementos => {
         let div = document.createElement('div');
@@ -161,7 +164,66 @@ function crearCheckout() {
     });
 };
 
-///////////// ELIMINAR ITEM INDIVIDUAL DE CARRITO ////////////
+function crearAgregados() {    
+    const prueba = JSON.parse(localStorage.getItem("carritoAgregados"))
+    //console.log("prueba", prueba) //ok  
+    visualizadorCarritoAgr.innerHTML = '';
+    prueba.forEach(elementos => {
+        let div = document.createElement('div');
+        div.classList.add("rowItemIndividual");
+        visualizadorCarritoAgr.innerHTML = `
+                            <div class="rowItemIndividual">
+                                <div class="cadaItem">
+                                    <small>ID</small>
+                                    <strong>${elementos.id}</strong>
+                                </div>
+                                <div class="cadaItem">
+                                    <small>Tipo</small>
+                                    <strong>${elementos.nombre}</strong>
+                                </div>
+                                <div class="cadaItem">
+                                    <small>Precio</small>
+                                    <p>U$S ${elementos.precio}</p>
+                                </div>
+                                <div class="cadaItem eliminarItemCarritoContenedor">
+                                    <button id="${elementos.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarrito">Eliminar</button>
+                                </div>
+                            </div>
+                            `
+    })
+    visualizadorCarritoAgr.append(div);
+    const quitarItem = document.querySelectorAll(".eliminarItemCarrito");
+        quitarItem.forEach((button) => {
+            button.addEventListener("click", eliminarAgr);
+        });
+}
+
+///////////////// FUNCION DE BOTONES AGREGADOS //////////////
+function botonesAgregados() {
+    boton = document.querySelectorAll(".botonAg");
+    boton.forEach(boton => {
+        boton.addEventListener("click", sumarAgregado);
+    })
+}
+
+///////////////// FUNCION AGREGAR AGREGADOS //////////////
+function sumarAgregado(e) {
+    if (carritoArray.length == 0) {
+        avisoPrimeroHab();
+    } else {
+        const idBotonAgr = e.currentTarget.id;
+        const agregadoSeleccionado = visualizadorAgrArray.find(agregado => agregado.id == idBotonAgr)
+        if (carritoAgregados.some(agregado => agregado.id == idBotonAgr)) {
+            avisoAgYaSeleccionado();
+        } else {
+            agregadoAviso();
+            carritoAgregados.push(agregadoSeleccionado)
+            localStorage.setItem("carritoAgregados", JSON.stringify(carritoAgregados));
+        }        
+    }
+}
+
+///////////// ELIMINAR HAB DE CARRITO ////////////
 function eliminar(e) {
     const itemEliminar = e.target.closest(".eliminarItemCarrito").getAttribute("id");
     carritoArray = carritoArray.filter((impresion) => impresion.id != itemEliminar);
@@ -170,7 +232,6 @@ function eliminar(e) {
     Toastify({
         text: "Eliminado",
         duration: 2500,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: false,
         gravity: "down",
@@ -185,11 +246,36 @@ function eliminar(e) {
     chequeosTextos();
 }
 
-///////////// VACIADO TOTAL CARRITO ////////////
-vaciar.addEventListener("click", avisoVaciado)
+///////////// ELIMINAR AGREGADO DE CARRITO ////////////
+function eliminarAgr(e) {
+    const itemEliminar = e.target.closest(".eliminarItemCarrito").getAttribute("id");
+    carritoAgregados = carritoAgregados.filter((impresion) => impresion.id != itemEliminar);
+    const carro = JSON.stringify(carritoAgregados);
+    localStorage.setItem("carritoAgregados", carro);
+    Toastify({
+        text: "Eliminado",
+        duration: 2500,
+        newWindow: true,
+        close: false,
+        gravity: "down",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            borderRadius: "0.8rem",
+            background: "linear-gradient(to top, #91e8c1, #69e1ab)",
+        },
+        onClick: function () { }
+    }).showToast();
+    chequeosTextos();
+}
+
+///////////// VACIADO TOTAL HABITACION ////////////
+vaciarHab.addEventListener("click", avisoVaciado)
 function vaciarCarrito() {
     carritoArray.length = 0;
     localStorage.setItem("carritoArray", JSON.stringify(carritoArray));
+    carritoAgregados.length = 0;
+    localStorage.setItem("carritoAgregados", JSON.stringify(carritoAgregados));
     chequeosTextos()
 }
 
@@ -246,6 +332,46 @@ function avisoHabYaSeleccionada() {
     })
 }
 
+// AVISO AGREGADO YA SELECCIONADO
+function avisoAgYaSeleccionado() {
+    Swal.fire({
+        title: 'Error',
+        text: 'ATENCIÓN: Agregado ya seleccionado',
+        icon: 'warning',
+        confirmButtonColor: '#06563b',
+        confirmButtonText: 'Aceptar'
+    })
+}
+
+// AVISO PRIMERO ELEGIR HABITACION
+function avisoPrimeroHab() {
+    Swal.fire({
+        title: 'Error',
+        text: 'ATENCIÓN: Primero elija su Habitación',
+        icon: 'warning',
+        confirmButtonColor: '#06563b',
+        confirmButtonText: 'Aceptar'
+    })
+}
+
+function agregadoAviso(){
+    Toastify({
+        text: "Agregado al carrito",
+        duration: 2500,
+        destination: "../pages/checkout.html",
+        newWindow: true,
+        close: false,
+        gravity: "down",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            borderRadius: "0.8rem",
+            background: "linear-gradient(to top, #91e8c1, #69e1ab)",
+        },
+        onClick: function () { }
+    }).showToast();
+}
+
 ///////////// CONSULTA PARA APLICAR TEXTOS ////////////
 function chequeosTextos() {
     ///////// PARA HTML CHECK-OUT
@@ -264,44 +390,31 @@ function chequeosTextos() {
     }
 }
 
-///////////////// FUNCION DE BOTONES AGREGADOS //////////////
-// function botonesAgregados() {
-//     inputWifi = document.querySelectorAll(".botonWifi");
-//     console.log(inputWifi)
-   
-//     inputWifi.addEventListener('input', sumarAgregado);
-// }
-
-
-// function sumarAgregado(e) {
-//     const idAgregado = e.currentTarget.id;
-//     const agregadoSeleccionado = visualizadorHabArray.find(habitacion => habitacion.id == idAgregado)
- 
-//     agregadosArray.push(agregadoSeleccionado)
-// }
-
-// botonesAgregados();
-
 ///////////////// FUNCION EMITIR FACTURA FINAL EN SW ALERT //////////////
 checkOutFinal.addEventListener("click", facturaFinal);
 
 function facturaFinal() {
     if (carritoArray.length !== 0) {
-        const factura = carritoArray.reduce((acumulador, precioItem) => acumulador + (precioItem.precio * 1.22), 0);
-        console.log("factura precio:", factura);
+        let contenidoCarritoAg = JSON.parse(localStorage.getItem("carritoAgregados"))
+        const facturaHab = carritoArray.reduce((acumulador, precioItem) => acumulador + (precioItem.precio), 0);
+        const facturaAgr = contenidoCarritoAg.reduce((acumuladorAgr, precioAgr) => acumuladorAgr + (precioAgr.precio), 0);
+        const facturaTotal = ((facturaHab + facturaAgr) * 1.22).toFixed(2)
         Swal.fire({
             title: 'Factura emitida :)',
-            html: 'Detalle factura: U$S ' + factura + ' IVA INC.<br><br>¡Los esperamos!<br><br>: : :  Hotel Relax - Punta del Este  : : :',
+            html: 'Habitación: U$S ' + facturaHab + '<br><br>Agregados: U$S ' + facturaAgr + '<br><br>Total: U$S ' + facturaTotal + ' IVA INC.<br><br><br>: : :  Hotel Relax - Punta del Este  : : :',
             imageUrl: '../images/logo hotel.png',
             imageAlt: 'Logo Hotel - Factura',
             icon: 'success',
             confirmButtonColor: '#06563b',
             confirmButtonText: 'Aceptar'
         })
+        vaciarCarrito();
     } else {
         avisoVaciadoError();
     }
 }
+
+
 
 
 
