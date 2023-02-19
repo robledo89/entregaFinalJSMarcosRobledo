@@ -167,13 +167,13 @@ function crearCheckout() {
 };
 
 function crearAgregados() {
-    prueba = JSON.parse(localStorage.getItem("carritoAgregados"))
+    carritoAgregados = JSON.parse(localStorage.getItem("carritoAgregados"))
     //console.log("prueba", prueba) //ok  
     visualizadorCarritoAgr.innerHTML = '';
-    prueba.forEach(agregado => {
+    carritoAgregados.forEach(agregado => {
         let div = document.createElement('div');
         div.classList.add("rowItemIndividual");
-        visualizadorCarritoAgr.innerHTML = `
+        div.innerHTML = `
                             <div class="rowItemIndividual">
                                 <div class="cadaItem">
                                     <small>ID</small>
@@ -192,12 +192,12 @@ function crearAgregados() {
                                 </div>
                             </div>
                             `
+        visualizadorCarritoAgr.append(div);
+        const quitarItemAgr = document.querySelectorAll(".eliminarItemCarritoAgr");
+        quitarItemAgr.forEach((button) => {
+            button.addEventListener("click", eliminarAgr);
+        });
     })
-    visualizadorCarritoAgr.append(div);
-    const quitarItemAgr = document.querySelectorAll(".eliminarItemCarritoAgr");
-    quitarItemAgr.forEach((button) => {
-        button.addEventListener("click", eliminarAgr);
-    });
 }
 
 ///////////////// FUNCION DE BOTONES AGREGADOS //////////////
@@ -213,6 +213,7 @@ function sumarAgregado(e) {
     if (carritoArray.length == 0) {
         avisoPrimeroHab();
     } else {
+        carritoAgregados = JSON.parse(localStorage.getItem("carritoAgregados"));
         const idBotonAgr = e.currentTarget.id;
         const agregadoSeleccionado = visualizadorAgrArray.find(agregado => agregado.id == idBotonAgr)
         if (carritoAgregados.some(agregado => agregado.id == idBotonAgr)) {
@@ -383,7 +384,7 @@ function chequeosTextos() {
             textoReserva.innerHTML = "Detalles de su reserva";
         } else {
             textoReserva.innerHTML = "Su carrito está vacío";
-        }       
+        }
         crearCheckout();
         crearAgregados();
     }
