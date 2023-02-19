@@ -414,6 +414,7 @@ h4 {
 
 .rowItemIndividual img {
   height: 6rem;
+  border-radius: 0.6rem;
 }
 
 #linkReservas{
@@ -441,6 +442,15 @@ h4 {
 small {
   display: flex;
   justify-content: space-around;
+}
+
+.visualizadorCarrito{
+  background-color: #91e8c1;
+  border-radius: 0.6rem;
+}
+
+.eliminarItemCarritoAgr img{
+  height: 1.3rem;
 }
 
 /* .estiloCheckout{

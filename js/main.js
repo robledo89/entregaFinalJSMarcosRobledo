@@ -4,8 +4,6 @@ let visualizadorAgrArray = [];
 let carritoArray = [];
 let carritoAgregados = [];
 
-let prueba = [];
-
 fetch("../js/items.json")
     .then(response => response.json())
     .then(data => {
@@ -125,7 +123,6 @@ function sumarAlCarrito(e) {
 
 ///////////////// CARGAR ITEMS AL CARRITO //////////////////
 function crearCheckout() {
-    //console.log("CarritoHAB", carritoArray)
     visualizadorCarrito.innerHTML = '';
     carritoArray.forEach(elementos => {
         let div = document.createElement('div');
@@ -157,7 +154,7 @@ function crearCheckout() {
                             <div class="cadaItem eliminarItemCarritoContenedor">
                                 <button id="${elementos.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarrito">Eliminar</button>
                             </div>
-            `;
+                        `;
         visualizadorCarrito.append(div);
         const quitarItem = document.querySelectorAll(".eliminarItemCarrito");
         quitarItem.forEach((button) => {
@@ -168,30 +165,27 @@ function crearCheckout() {
 
 function crearAgregados() {
     carritoAgregados = JSON.parse(localStorage.getItem("carritoAgregados"))
-    //console.log("prueba", prueba) //ok  
     visualizadorCarritoAgr.innerHTML = '';
     carritoAgregados.forEach(agregado => {
         let div = document.createElement('div');
         div.classList.add("rowItemIndividual");
-        div.innerHTML = `
-                            <div class="rowItemIndividual">
-                                <div class="cadaItem">
-                                    <small>ID</small>
-                                    <strong>${agregado.id}</strong>
-                                </div>
-                                <div class="cadaItem">
-                                    <small>Tipo</small>
-                                    <strong>${agregado.nombre}</strong>
-                                </div>
-                                <div class="cadaItem">
-                                    <small>Precio</small>
-                                    <p>U$S ${agregado.precio}</p>
-                                </div>
-                                <div class="cadaItem eliminarItemCarritoContenedor">
-                                    <button id="${agregado.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarritoAgr">Eliminar</button>
-                                </div>
+        div.innerHTML = `                            
+                            <div class="col-2 cadaItem">
+                                <small>Código</small>
+                                <strong>${agregado.id}</strong>
                             </div>
-                            `
+                            <div class="col-4 cadaItem">
+                                <small>Tipo</small>
+                                <strong>${agregado.nombre}</strong>
+                            </div>
+                            <div class="col-5 cadaItem">
+                                <small>Precio</small>
+                                <p>U$S ${agregado.precio}</p>
+                            </div>
+                            <div class="col-1 cadaItem eliminarItemCarritoContenedor">
+                                <button id="${agregado.id}" class="col-12 mx-auto buttonForm botonHab eliminarItemCarritoAgr"><img src="../images/trash.png"></button>
+                            </div>                        
+                        `
         visualizadorCarritoAgr.append(div);
         const quitarItemAgr = document.querySelectorAll(".eliminarItemCarritoAgr");
         quitarItemAgr.forEach((button) => {
@@ -357,6 +351,7 @@ function avisoPrimeroHab() {
     })
 }
 
+// AVISO AGREGADO SUMADO
 function agregadoAviso() {
     Toastify({
         text: "Agregado al carrito",
@@ -394,7 +389,7 @@ function chequeosTextos() {
     }
 }
 
-///////////////// FUNCION EMITIR FACTURA FINAL EN SW ALERT //////////////
+///////////////// FUNCION EMITIR FACTURA FINAL EN SWAL //////////////
 checkOutFinal.addEventListener("click", facturaFinal);
 
 function facturaFinal() {
